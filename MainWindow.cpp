@@ -14,14 +14,14 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->setupUi(this);
 	ui->canvasFrame->layout()->addWidget(m_canvasWidget);
 
+	m_undoView->setWindowFlags(Qt::Dialog | Qt::WindowStaysOnTopHint);
+	m_undoView->show();
+
 	connect(ui->undoButton, &QPushButton::clicked, m_undoStack, &QUndoStack::undo);
 	connect(ui->redoButton, &QPushButton::clicked, m_undoStack, &QUndoStack::redo);
 
 	connect(ui->actionUndo, &QAction::triggered, m_undoStack, &QUndoStack::undo);
 	connect(ui->actionRedo, &QAction::triggered, m_undoStack, &QUndoStack::redo);
-
-	m_undoView->setWindowFlags(Qt::Dialog);
-	m_undoView->show();
 }
 
 MainWindow::~MainWindow()
